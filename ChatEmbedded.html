@@ -41,15 +41,16 @@
         embedded_svc.init(
 			'https://svcsdo-20220330.my.salesforce.com',
 			'https://cirrus-sccommunity-1779bc252-17fd87bd201.force.com/napili',
-          gslbBaseURL,
-          '00D5j00000B8y4U',
-          'omni_1', {
-            baseLiveAgentContentURL: 'path/to/baseLiveAgentContentURL',
-            deploymentId: '5725j000000c0r9',
-            buttonId: '5735j000000LFWE',
-            baseLiveAgentURL: 'path/to/baseLiveAgentURL',
-            eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I10000000GmaiEAC_15f4a2dc683',
-            isOfflineSupportEnabled: true
+			gslbBaseURL,
+			'00D5j00000B8y4U',
+			'LEX_EinsteinBots_for_Napili',
+			{
+				baseLiveAgentContentURL: 'https://c.la2-c2-ukb.salesforceliveagent.com/content',
+				deploymentId: '5725j000000c0r9',
+				buttonId: '5735j000000LFWE',
+				baseLiveAgentURL: 'https://d.la2-c2-ukb.salesforceliveagent.com/chat',
+				eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I10000000GmaiEAC_15f4a2dc683',
+				isOfflineSupportEnabled: false
           }
         );
 
