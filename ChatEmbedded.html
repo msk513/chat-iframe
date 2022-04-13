@@ -21,14 +21,14 @@ HRD iframe code
 <script type='text/javascript'>
 	var initESW = function(gslbBaseURL) {
 
-	embedded_svc.settings.displayHelpButton = true; // Or false
-        embedded_svc.settings.language = 'en-US'; // For example, enter 'en' or 'en-US'
-        embedded_svc.settings.devMode = true;
-        // Have set the widget height and width as a property on the object
-        embedded_svc.settings.widgetWidth = 320;
-        embedded_svc.settings.widgetHeight = 498;
-        embedded_svc.settings.enabledFeatures = ['LiveAgent'];
-        embedded_svc.settings.entryFeature = 'LiveAgent';
+		embedded_svc.settings.displayHelpButton = true; // Or false
+		embedded_svc.settings.language = 'en-US'; // For example, enter 'en' or 'en-US'
+		embedded_svc.settings.devMode = true;
+		// Have set the widget height and width as a property on the object
+		embedded_svc.settings.widgetWidth = 320;
+		embedded_svc.settings.widgetHeight = 498;
+		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+		embedded_svc.settings.entryFeature = 'LiveAgent';
 
 		embedded_svc.init(
 			'https://svcsdo-20220330.my.salesforce.com',
@@ -47,6 +47,7 @@ HRD iframe code
 		);
 	};
 
+	/*
         embedded_svc.addEventHandler("afterMinimize", function() {
           var sidebar = document.querySelector('.embeddedServiceSidebarMinimizedDefaultUI');
           var height = sidebar.clientHeight;
@@ -76,7 +77,7 @@ HRD iframe code
           }, '*');
         });
       };
-	
+	*/
 	
 	if (!window.embedded_svc) {
 		var s = document.createElement('script');
