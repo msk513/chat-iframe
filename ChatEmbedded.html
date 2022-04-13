@@ -86,13 +86,13 @@
 
       if (!window.embedded_svc) {
         var s = document.createElement('script');
-        s.setAttribute('src', '<yourcoreurl>/embeddedservice/5.0/esw.js');
+        s.setAttribute('src', 'https://svcsdo-20220330.my.salesforce.com/embeddedservice/5.0/esw.js');
         s.onload = function() {
           initESW(null);
         };
         document.body.appendChild(s);
       } else {
-        initESW('<yourcoreurl>/to/esw.js');
+        initESW('https://svcsdo-20220330.my.salesforce.com/embeddedservice/5.0/esw.js');
       }
 
     </script>
