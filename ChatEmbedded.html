@@ -1,44 +1,47 @@
 <html>
   <body>
-    <style type='text/css'>
-      .embeddedServiceHelpButton .helpButton .uiButton {
-        background-color: #005290;
-        font-family: "Arial", sans-serif;
-      }
+HRD iframe code	    
+//hrd add start
+<style type='text/css'>
+	.embeddedServiceHelpButton .helpButton .uiButton {
+		background-color: #005290;
+		font-family: "Salesforce Sans", sans-serif;
+	}
+	.embeddedServiceHelpButton .helpButton .uiButton:focus {
+		outline: 1px solid #005290;
+	}
+	@font-face {
+		font-family: 'Salesforce Sans';
+		src: url('https://c1.sfdcstatic.com/etc/clientlibs/sfdc-aem-master/clientlibs_base/fonts/SalesforceSans-Regular.woff') format('woff'),
+		url('https://c1.sfdcstatic.com/etc/clientlibs/sfdc-aem-master/clientlibs_base/fonts/SalesforceSans-Regular.ttf') format('truetype');
+	}
+</style>
 
-    .embeddedServiceHelpButton .helpButton .uiButton:focus {
-      outline: 1px solid #005290;
-    }
-    </style>
+<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+<script type='text/javascript'>
+	var initESW = function(gslbBaseURL) {
+		embedded_svc.settings.displayHelpButton = true; //または false
+		embedded_svc.settings.language = ''; //たとえば、「en」または「en-US」を入力します
 
-    <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.js'></script>
-    <script type='text/javascript'>
-      // On page load set the correct size of the iframe to account for either CWAE/Contact Us or Session Continuity.
-      function helpButtonLoaded() {
-        var helpButton = document.querySelector('.helpButton');
-        if (!helpButton) {
-          window.setTimeout(helpButtonLoaded, 500);
-          return;
-        }
-        var height = helpButton.clientHeight;
-        var width = helpButton.clientWidth;
-        window.parent.postMessage({
-                                  frameHeight: height,
-                                  frameWidth: width
-                                  }, '*'); // Used a * but for security reasons you can plug in the domain name.
-      }
-      window.onload = helpButtonLoaded();
+		//embedded_svc.settings.defaultMinimizedText = '...'; //(エキスパートとチャットにデフォルト設定)
+		//embedded_svc.settings.disabledMinimizedText = '...'; //(エージェントがオフラインにデフォルト設定)
 
-      var initESW = function(gslbBaseURL) {
-        embedded_svc.settings.displayHelpButton = true; // Or false
-        embedded_svc.settings.language = 'ja-JP'
-        embedded_svc.settings.devMode = true;
-        // Have set the widget height and width as a property on the object
-        embedded_svc.settings.widgetWidth = 320;
-        embedded_svc.settings.widgetHeight = 498;
-        embedded_svc.settings.enabledFeatures = ['LiveAgent'];
-        embedded_svc.settings.entryFeature = 'LiveAgent';
-        embedded_svc.init(
+		//embedded_svc.settings.loadingText = ''; //(読み込み中にデフォルト設定)
+		//embedded_svc.settings.storageDomain = 'yourdomain.com'; //(リリースのドメインを設定して、訪問者がチャットセッション中にサブドメインを移動できるようにします)
+
+		// チャット の設定
+		//embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
+			// Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
+			// Returns a valid button ID.
+		//};
+		//embedded_svc.settings.prepopulatedPrechatFields = {}; //事前チャットフォームの項目の自動入力を設定
+		//embedded_svc.settings.fallbackRouting = []; //ボタン ID、ユーザ ID、または userId_buttonId の配列
+		//embedded_svc.settings.offlineSupportMinimizedText = '...'; //(デフォルトは [お問い合わせ])
+
+		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+		embedded_svc.settings.entryFeature = 'LiveAgent';
+
+		embedded_svc.init(
 			'https://svcsdo-20220330.my.salesforce.com',
 			'https://cirrus-sccommunity-1779bc252-17fd87bd201.force.com/napili',
 			gslbBaseURL,
@@ -51,50 +54,23 @@
 				baseLiveAgentURL: 'https://d.la2-c2-ukb.salesforceliveagent.com/chat',
 				eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I10000000GmaiEAC_15f4a2dc683',
 				isOfflineSupportEnabled: false
-          }
-        );
+			}
+		);
+	};
 
-        embedded_svc.addEventHandler("afterMinimize", function() {
-          var sidebar = document.querySelector('.embeddedServiceSidebarMinimizedDefaultUI');
-          var height = sidebar.clientHeight;
-          var width = sidebar.clientWidth;
-          window.parent.postMessage({
-            frameHeight: height,
-            frameWidth: width
-           }, '*');
-        });
+	if (!window.embedded_svc) {
+		var s = document.createElement('script');
+		s.setAttribute('src', 'https://svcsdo-20220330.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+		s.onload = function() {
+			initESW(null);
+		};
+		document.body.appendChild(s);
+	} else {
+		initESW('https://service.force.com');
+	}
+</script>	    
+	    
+//hrd add end
 
-        embedded_svc.addEventHandler("afterMaximize", function() {
-          var container = document.querySelector('.dockableContainer');
-          var height = container.clientHeight;
-          var width = container.clientWidth;
-          window.parent.postMessage({
-            frameHeight: embedded_svc.settings.widgetHeight,
-            frameWidth: embedded_svc.settings.widgetWidth
-          }, '*');
-        });
-
-        embedded_svc.addEventHandler("afterDestroy", function() {
-          var height = document.querySelector('.helpButton').clientHeight;
-          var width = document.querySelector('.helpButton').clientWidth;
-          window.parent.postMessage({
-            frameHeight: height,
-            frameWidth: width
-          }, '*');
-        });
-      };
-
-      if (!window.embedded_svc) {
-        var s = document.createElement('script');
-        s.setAttribute('src', 'https://svcsdo-20220330.my.salesforce.com/embeddedservice/5.0/esw.js');
-        s.onload = function() {
-          initESW(null);
-        };
-        document.body.appendChild(s);
-      } else {
-        initESW('https://svcsdo-20220330.my.salesforce.com/embeddedservice/5.0/esw.js');
-      }
-
-    </script>
   </body>
 </html>
